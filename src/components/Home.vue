@@ -1,14 +1,12 @@
 <script setup lang="ts">
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import image from '../assets/1.png'
+import Hole from '../assets/HoleText3.png'
 
 
 console.clear();
 
-
 gsap.registerPlugin(ScrollTrigger);
-
 
 
 window.addEventListener("load", () => {
@@ -17,22 +15,22 @@ window.addEventListener("load", () => {
      scrollTrigger: {
        trigger: ".wrapper",
        start: "top top",
-       end: "+=150%",
+       end: "+=180%",
        pin: true,
        scrub: true,
        markers: true
      }
    })
    .to("img", {
-     scale: 2,
-     z: 350,
+     scale: 1.7,
+     z: 400,
      transformOrigin: "center center",
      ease: "power1.inOut"
    })
    .to(
      ".section.hero",
      {
-       scale: 1.1,
+       scale: 1,
        transformOrigin: "center center",
        ease: "power1.inOut"
      },
@@ -50,17 +48,11 @@ window.addEventListener("load", () => {
 <div class="wrapper">
  <div class="content">
    <section class="section hero"></section>
-   <section class="section gradient-purple">
-
-    <h1> TEEEEEEST </h1>
-   </section>
+   <section class="gradient-fade"></section>
    <section class="section gradient-blue"></section>
  </div>
  <div class="image-container">
-   <img :src=image alt="image">
-
-
-   <!-- <img src="https://assets-global.website-files.com/63ec206c5542613e2e5aa784/643312a6bc4ac122fc4e3afa_main%20home.webp" alt="image"> -->
+   <img :src=Hole alt="image">
  </div>
 </div>
 
@@ -69,7 +61,6 @@ window.addEventListener("load", () => {
 
 
 <style>
-
 
 
 
@@ -85,20 +76,24 @@ window.addEventListener("load", () => {
  overflow-x: hidden;
 }
 
-
 .content .section {
  width: 100%;
  height: 100vh;
 }
 
-
-.content .section.hero {
- background-image: url(https://images.unsplash.com/photo-1589848315097-ba7b903cc1cc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
- background-position: center center;
- background-repeat: no-repeat;
- background-size: cover;
+.gradient-fade {
+  height:300px;
+  margin-top: -300px;
+  position: relative;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(31, 46, 56, 1));
 }
 
+.content .section.hero {
+  background-image: url('../assets/Mountain2.png'); 
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
 .image-container {
  width: 100%;
