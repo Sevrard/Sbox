@@ -10,6 +10,7 @@ console.clear();
 gsap.registerPlugin(ScrollTrigger);
 
 
+
 window.addEventListener("load", () => {
  gsap
    .timeline({
