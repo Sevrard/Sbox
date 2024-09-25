@@ -49,7 +49,10 @@ window.addEventListener("load", () => {
 <div class="wrapper">
  <div class="content">
    <section class="section hero"></section>
-   <section class="section gradient-purple"></section>
+   <section class="section gradient-purple">
+
+    <h1> TEEEEEEST </h1>
+   </section>
    <section class="section gradient-blue"></section>
  </div>
  <div class="image-container">
