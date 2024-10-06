@@ -2,7 +2,7 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
-import Hole from '../assets/Hole1.png'
+import Hole from '../assets/HoleFinal.png'
 
 
 console.clear();
