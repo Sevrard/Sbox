@@ -1,12 +1,25 @@
 <script setup lang="ts">
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Hole from '../assets/HoleText3.png'
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+import Hole from '../assets/Hole1.png'
 
 
 console.clear();
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin); // Enregistrer ScrollToPlugin
+
+// Fonction qui simule le scroll au clic du bouton
+const scrollToSection = () => {
+  gsap.to(window, {
+    scrollTo: { y: ".gradient-blue",  offsetY: -1300,  autoKill: false }, // Scroll vers la section .gradient-blue
+    duration: 4,
+    ease: "power2.inOut",
+    onComplete: () => {
+      ScrollTrigger.refresh(); // Rafraîchir ScrollTrigger après le défilement
+    }
+  });
+};
 
 
 window.addEventListener("load", () => {
@@ -44,6 +57,7 @@ window.addEventListener("load", () => {
 
 <template>
 
+<button @click="scrollToSection" class="scroll-button">Scroll to Animation</button>
 
 <div class="wrapper">
  <div class="content">
