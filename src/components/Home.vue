@@ -103,7 +103,7 @@ window.addEventListener("load", () => {
 }
 
 .content .section.hero {
-  background-image: url('../assets/Mountain2.png'); 
+  background-image: url('../assets/Mountain.png'); 
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
