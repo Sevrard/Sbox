@@ -1,0 +1,51 @@
+@font-face {
+    font-family: 'sea';
+    src: url('/src/assets/fonts/sea.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'skud';
+    src: url('/src/assets/fonts/skud.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'sunrise';
+    src: url('/src/assets/fonts/sunrise.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'quick';
+    src: url('/src/assets/fonts/quick.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'sweety';
+    src: url('/src/assets/fonts/sweety.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'tower';
+    src: url('/src/assets/fonts/tower.ttf');
+    font-weight: normal;
+    font-style: normal;
+}@font-face {
+    font-family: 'sequence';
+    src: url('/src/assets/fonts/sequence.ttf');
+    font-weight: normal;
+    font-style: normal;
+}@font-face {
+    font-family: 'legacy';
+    src: url('/src/assets/fonts/legacy.ttf');
+    font-weight: normal;
+    font-style: normal;
+}@font-face {
+    font-family: 'goodbye';
+    src: url('/src/assets/fonts/goodbye.ttf');
+    font-weight: normal;
+    font-style: normal;
+}

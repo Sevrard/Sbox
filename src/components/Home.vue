@@ -2,19 +2,19 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-
-import Hole from "../assets/HoleFinal3.png";
-
+import Hole from "../assets/HoleFinal4.png";
+import TopBar from "./topbar/Topbar.vue"
 import SocialBar from "./sidebar/Socialbar.vue"
 import Timeline from "./sidebar/Timeline.vue"
 import BounceButton from "./sidebar/BounceButton.vue"
+import MiddleBlock from "./MiddleBlock.vue"
+
 
 console.clear();
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin); // Enregistrer ScrollToPlugin
 
 window.addEventListener("scroll", () => {
-  console.log(window.scrollY);
 });
 
 window.addEventListener("load", () => {
@@ -57,30 +57,33 @@ window.addEventListener("load", () => {
 </script>
 
 <template>
+  <TopBar />
   <SocialBar />
   <Timeline />
   <div class="wrapper">
+    
     <div class="content">
       <section class="section hero"></section>
       <section class="gradient-fade"></section>
-      <section class="section gradient-blue"></section>
+      <div class="block"></div>
+      <MiddleBlock />
+      <div class="block skills"></div>
     </div>
 
     <div class="image-container">
-
       <BounceButton />
-
       <img :src="Hole" alt="image" />
     </div>
+
   </div>
 </template>
 
 <style>
-
 .hidden {
   opacity: 0;
   transition: opacity 0.5s ease;
 }
+
 .display {
   opacity: 1;
   transition: opacity 0.5s ease;
@@ -100,6 +103,11 @@ window.addEventListener("load", () => {
 .content .section {
   width: 100%;
   height: 100vh;
+}
+
+.block {
+  width: 100%;
+  height: 200vh;
 }
 
 .gradient-fade {
@@ -136,4 +144,9 @@ window.addEventListener("load", () => {
 }
 
 
+/* SECTION */
+
+.skills {
+  background-color: #4c5466;
+}
 </style>
