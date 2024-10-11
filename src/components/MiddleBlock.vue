@@ -36,10 +36,10 @@ import logo from "../assets/white.png";
 ///////////////////////////////////////////////////////////
 <style>
 .middleBLock {
-    width: 45%;
+    width: 33vw;
     position: absolute;
-    left: 50%;
     margin-top: -330px;
+    left: 50%;
     transform: translateX(-50%);
     z-index: 1000;
     background-color: #2A405C;
