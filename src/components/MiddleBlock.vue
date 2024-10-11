@@ -36,7 +36,7 @@ import logo from "../assets/white.png";
 ///////////////////////////////////////////////////////////
 <style>
 .middleBLock {
-    width: 33vw;
+    width: 35em;
     position: absolute;
     margin-top: -330px;
     left: 50%;
@@ -45,7 +45,7 @@ import logo from "../assets/white.png";
     background-color: #2A405C;
     border-radius: 15px;
     /* box-shadow: 0px 0px 34px 19px rgb(236 88 114 / 50%); */
-    padding: 70px 0;
+    padding: 70px 70px;
 
     p {
         font-size: 17px;
@@ -64,7 +64,7 @@ import logo from "../assets/white.png";
 }
 
 .middleTextContent {
-    width: 66%;
+    width: 80%;
 }
 
 .middleButtonContent{

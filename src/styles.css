@@ -59,8 +59,9 @@
 
 
 :root {
-    --mainColor: #40ff4d;
+    --mainColor: #FF4040;
     --secondaryColor: black;
+    --logo: url('/src/assets/red.png'); 
   }
   
   .red-theme {
