@@ -42,7 +42,6 @@ window.addEventListener("scroll", () => {
 .socialBar {
   position: fixed;
   z-index: 2000;
-  color: #ff3f3f;
   height: 100%;
   left: 0;
   top: 0;
@@ -175,7 +174,7 @@ ul li a span:before {
   top: 0;
   left: 0;
   background: rgba(0, 0, 0, 0);
-  color: #ff3f3f;
+  color: var(--mainColor);
   transform-origin: top;
   transition: transform 0.5s;
   /* border: 1px solid black; */

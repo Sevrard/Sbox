@@ -49,3 +49,34 @@
     font-weight: normal;
     font-style: normal;
 }
+
+.red-text {
+    color:var(--mainColor);
+    font-weight: bold;
+}
+
+
+
+
+:root {
+    --mainColor: #40ff4d;
+    --secondaryColor: black;
+  }
+  
+  .red-theme {
+    --mainColor: #FF4040;
+    --secondaryColor: rgb(51, 210, 54);
+    --logo: url('/src/assets/red.png'); 
+  }
+
+  .green-theme {
+    --mainColor: #1fcf2b;
+    --secondaryColor: rgb(51, 210, 54);
+    --logo: url('/src/assets/green.png'); 
+  }
+
+  .purple-theme {
+    --mainColor: #d940ff;
+    --secondaryColor: rgb(51, 210, 54);
+    --logo: url('/src/assets/purple.png'); 
+  }

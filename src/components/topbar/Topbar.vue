@@ -3,6 +3,12 @@
 <template>
     <div class="topBar">
 
+        <div class="btnBox">
+            <button class="themeBtn b1" @click="setTheme('red-theme')"></button>
+            <button class="themeBtn b2" @click="setTheme('green-theme')"></button>
+            <button class="themeBtn b3" @click="setTheme('purple-theme')"></button>
+        </div>
+
         <div class="langSlider">
             <div class="box">
                 <input @change="toggleLanguage" class="type-checkbox" id="toogle" type="checkbox" name="name">
@@ -19,25 +25,24 @@
 
 //////////////////////////////////////////////////////////// SCRIPT
 ///////////////////////////////////////////////////////////
-<script>
+<script setup>
+import { ref } from 'vue';
+import { useI18n } from 'vue-i18n'; 
+import { useThemeStore } from '../../stores/themesStore.js'; 
 
-export default {
-    data() {
-        return {
-            currentLang: 'fr' // Langue par défaut
-        };
-    },
-    methods: {
-        toggleLanguage(event) {
-            // Change la langue en fonction de l'état du toggle
-            if (event.target.checked) {
-                this.$i18n.locale = 'en'; // Change vers anglais
-            } else {
-                this.$i18n.locale = 'fr'; // Retour au français
-            }
-        }
-    }
+const { locale } = useI18n(); 
+const currentLang = ref('fr'); // Langue par défaut
+
+const toggleLanguage = (event) => {
+  if (event.target.checked) {
+    locale.value = 'en'; 
+    currentLang.value = 'en';
+  } else {
+    locale.value = 'fr'; 
+    currentLang.value = 'fr';
+  }
 };
+const { setTheme } = useThemeStore();
 
 </script>
 
@@ -46,6 +51,7 @@ export default {
 //////////////////////////////////////////////////////////// STYLE
 ///////////////////////////////////////////////////////////
 <style>
+
 .topBar {
     position: fixed;
     top: 0;
@@ -55,7 +61,25 @@ export default {
     z-index: 1000;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Varela+Round");
+.btnBox {
+    position: absolute;
+    right: 9%;
+    display: flex;
+    flex-direction: row;
+    gap:10px;
+    height:100%;
+    align-items: center;
+}
+.themeBtn {
+    width: 16px;
+    height: 16px;
+    border-radius: 10px;
+    border: 0px;
+}
+.b1 { background-color: #FF4040 }
+.b2 { background-color: #1fcf2b }
+.b3 { background-color: #d940ff }
+
 
 span {
     font-weight: 400;

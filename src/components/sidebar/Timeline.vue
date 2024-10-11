@@ -61,7 +61,7 @@ export default {
 .timeline {
     position: fixed;
     z-index: 2000;
-    color: #ff3f3f;
+    color: var(--mainColor);
     height: 100%;
     right: 0;
     top: 0;

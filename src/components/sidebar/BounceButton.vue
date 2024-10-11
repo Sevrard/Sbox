@@ -1,32 +1,29 @@
 //////////////////////////////////////////////////////////// SCRIPT
 ///////////////////////////////////////////////////////////
-<script>
+<script setup>
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-export default {
-  mounted() {
-    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
-  },
-  methods: {
-    scrollToSection() {
-      const button = document.querySelector(".rightPart");
-      if (button) {
-        button.classList.add("hidden");
-      }
-      gsap.to(window, {
-        scrollTo: { y: ".gradient-blue", offsetY: -2000, autoKill: false },
-        duration: 4,
-        ease: "power2.inOut",
-        onComplete: () => {
-          ScrollTrigger.refresh();
-        },
-      });
-    },
 
-  },
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+const scrollToSection = () => {
+  const button = document.querySelector(".rightPart");
+  if (button) {
+    button.classList.add("hidden");
+  }
+  gsap.to(window, {
+    scrollTo: { y: ".gradient-blue", offsetY: -2000, autoKill: false },
+    duration: 4,
+    ease: "power2.inOut",
+    onComplete: () => {
+      ScrollTrigger.refresh();
+    },
+  });
+
 };
 
+// Ajouter un listener pour le scroll
 window.addEventListener("scroll", () => {
   const button = document.querySelector(".rightPart");
   if (window.scrollY === 0) {
@@ -44,12 +41,12 @@ window.addEventListener("scroll", () => {
 ///////////////////////////////////////////////////////////
 <template>
 
-  <div @click="scrollToSection" class="rightPart bounce">
+  <div @click="scrollToSection" class="rightPart">
 
     <div class="rightText">
-      <h1> {{ $t('homeText') }} </h1>
-      <!-- <h2> {{$t('homeText')}} </h2> -->
-      <!-- <h3> {{$t('homeText')}} </h3>  -->
+      <h1> {{ $t('clickToNext') }} </h1>
+      <!-- <h2> {{$t('clickToNext')}} </h2> -->
+      <!-- <h3> {{$t('clickToNext')}} </h3>  -->
     </div>
     <div class='pin'></div>
     <div class='pulse'></div>
@@ -64,40 +61,37 @@ window.addEventListener("scroll", () => {
 .rightPart {
   position: absolute;
   z-index: 2000;
-  right: 10.4%;
-  top: 33%;
+  right: 7%;
+  top: 40%;
   display: flex;
   flex-direction: column;
   gap: 1px;
   cursor: pointer;
-  width: 132px;
   align-content: center;
   justify-content: center;
 
   .rightText {
-    color: #ff4040;
+    color: var(--mainColor);
     font-size: 15px;
     text-align: center;
+    margin-bottom:7px
 
   }
 
   h1 {
     color: white;
-    font-size: 40px;
+    font-size: 45px;
     font-family: 'goodbye';
   }
 
   h2 {
     color: white;
     font-size: 40px;
-    font-family: 'sunrise';
+    font-family: monospace;
+    line-height: 1.5;
+    font-weight: 100;
   }
 
-  h3 {
-    color: white;
-    font-size: 33px;
-    font-family: 'sweety';
-  }
 }
 
 /* ICONE CSS */
@@ -107,7 +101,7 @@ window.addEventListener("scroll", () => {
   width: 30px;
   height: 30px;
   border-radius: 50% 50% 50% 0;
-  background: #ff3f3f;
+  background: var(--mainColor);
   -webkit-transform: rotate(-45deg);
   -moz-transform: rotate(-45deg);
   -o-transform: rotate(-45deg);
@@ -309,163 +303,5 @@ window.addEventListener("scroll", () => {
   }
 }
 
-@-moz-keyframes bounce {
-  0% {
-    opacity: 0;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-    filter: alpha(opacity=0);
-    -webkit-transform: translateY(-2000px) rotate(-45deg);
-    -moz-transform: translateY(-2000px) rotate(-45deg);
-    -o-transform: translateY(-2000px) rotate(-45deg);
-    -ms-transform: translateY(-2000px) rotate(-45deg);
-    transform: translateY(-2000px) rotate(-45deg);
-  }
 
-  60% {
-    opacity: 1;
-    -ms-filter: none;
-    filter: none;
-    -webkit-transform: translateY(30px) rotate(-45deg);
-    -moz-transform: translateY(30px) rotate(-45deg);
-    -o-transform: translateY(30px) rotate(-45deg);
-    -ms-transform: translateY(30px) rotate(-45deg);
-    transform: translateY(30px) rotate(-45deg);
-  }
-
-  80% {
-    -webkit-transform: translateY(-10px) rotate(-45deg);
-    -moz-transform: translateY(-10px) rotate(-45deg);
-    -o-transform: translateY(-10px) rotate(-45deg);
-    -ms-transform: translateY(-10px) rotate(-45deg);
-    transform: translateY(-10px) rotate(-45deg);
-  }
-
-  100% {
-    -webkit-transform: translateY(0) rotate(-45deg);
-    -moz-transform: translateY(0) rotate(-45deg);
-    -o-transform: translateY(0) rotate(-45deg);
-    -ms-transform: translateY(0) rotate(-45deg);
-    transform: translateY(0) rotate(-45deg);
-  }
-}
-
-@-webkit-keyframes bounce {
-  0% {
-    opacity: 0;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-    filter: alpha(opacity=0);
-    -webkit-transform: translateY(-2000px) rotate(-45deg);
-    -moz-transform: translateY(-2000px) rotate(-45deg);
-    -o-transform: translateY(-2000px) rotate(-45deg);
-    -ms-transform: translateY(-2000px) rotate(-45deg);
-    transform: translateY(-2000px) rotate(-45deg);
-  }
-
-  60% {
-    opacity: 1;
-    -ms-filter: none;
-    filter: none;
-    -webkit-transform: translateY(30px) rotate(-45deg);
-    -moz-transform: translateY(30px) rotate(-45deg);
-    -o-transform: translateY(30px) rotate(-45deg);
-    -ms-transform: translateY(30px) rotate(-45deg);
-    transform: translateY(30px) rotate(-45deg);
-  }
-
-  80% {
-    -webkit-transform: translateY(-10px) rotate(-45deg);
-    -moz-transform: translateY(-10px) rotate(-45deg);
-    -o-transform: translateY(-10px) rotate(-45deg);
-    -ms-transform: translateY(-10px) rotate(-45deg);
-    transform: translateY(-10px) rotate(-45deg);
-  }
-
-  100% {
-    -webkit-transform: translateY(0) rotate(-45deg);
-    -moz-transform: translateY(0) rotate(-45deg);
-    -o-transform: translateY(0) rotate(-45deg);
-    -ms-transform: translateY(0) rotate(-45deg);
-    transform: translateY(0) rotate(-45deg);
-  }
-}
-
-@-o-keyframes bounce {
-  0% {
-    opacity: 0;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-    filter: alpha(opacity=0);
-    -webkit-transform: translateY(-2000px) rotate(-45deg);
-    -moz-transform: translateY(-2000px) rotate(-45deg);
-    -o-transform: translateY(-2000px) rotate(-45deg);
-    -ms-transform: translateY(-2000px) rotate(-45deg);
-    transform: translateY(-2000px) rotate(-45deg);
-  }
-
-  60% {
-    opacity: 1;
-    -ms-filter: none;
-    filter: none;
-    -webkit-transform: translateY(30px) rotate(-45deg);
-    -moz-transform: translateY(30px) rotate(-45deg);
-    -o-transform: translateY(30px) rotate(-45deg);
-    -ms-transform: translateY(30px) rotate(-45deg);
-    transform: translateY(30px) rotate(-45deg);
-  }
-
-  80% {
-    -webkit-transform: translateY(-10px) rotate(-45deg);
-    -moz-transform: translateY(-10px) rotate(-45deg);
-    -o-transform: translateY(-10px) rotate(-45deg);
-    -ms-transform: translateY(-10px) rotate(-45deg);
-    transform: translateY(-10px) rotate(-45deg);
-  }
-
-  100% {
-    -webkit-transform: translateY(0) rotate(-45deg);
-    -moz-transform: translateY(0) rotate(-45deg);
-    -o-transform: translateY(0) rotate(-45deg);
-    -ms-transform: translateY(0) rotate(-45deg);
-    transform: translateY(0) rotate(-45deg);
-  }
-}
-
-@keyframes bounce {
-  0% {
-    opacity: 0;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-    filter: alpha(opacity=0);
-    -webkit-transform: translateY(-2000px) rotate(-45deg);
-    -moz-transform: translateY(-2000px) rotate(-45deg);
-    -o-transform: translateY(-2000px) rotate(-45deg);
-    -ms-transform: translateY(-2000px) rotate(-45deg);
-    transform: translateY(-2000px) rotate(-45deg);
-  }
-
-  60% {
-    opacity: 1;
-    -ms-filter: none;
-    filter: none;
-    -webkit-transform: translateY(30px) rotate(-45deg);
-    -moz-transform: translateY(30px) rotate(-45deg);
-    -o-transform: translateY(30px) rotate(-45deg);
-    -ms-transform: translateY(30px) rotate(-45deg);
-    transform: translateY(30px) rotate(-45deg);
-  }
-
-  80% {
-    -webkit-transform: translateY(-10px) rotate(-45deg);
-    -moz-transform: translateY(-10px) rotate(-45deg);
-    -o-transform: translateY(-10px) rotate(-45deg);
-    -ms-transform: translateY(-10px) rotate(-45deg);
-    transform: translateY(-10px) rotate(-45deg);
-  }
-
-  100% {
-    -webkit-transform: translateY(0) rotate(-45deg);
-    -moz-transform: translateY(0) rotate(-45deg);
-    -o-transform: translateY(0) rotate(-45deg);
-    -ms-transform: translateY(0) rotate(-45deg);
-    transform: translateY(0) rotate(-45deg);
-  }
-}
 </style>
