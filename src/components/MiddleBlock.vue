@@ -36,7 +36,7 @@ import logo from "../assets/white.png";
 ///////////////////////////////////////////////////////////
 <style>
 .middleBLock {
-    width: 35em;
+    width: 40em;
     position: absolute;
     margin-top: -330px;
     left: 50%;

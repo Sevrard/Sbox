@@ -23,7 +23,7 @@ window.addEventListener("load", () => {
   //   onComplete: () => { ScrollTrigger.refresh() },
   // });
   gsap
-    .timeline({ scrollTrigger: { trigger: ".wrapper", start: "top top", end: "+=180%", pin: true, scrub: true, markers: true }})
+    .timeline({ scrollTrigger: { trigger: ".wrapper", start: "top top", end: "+=180%", pin: true, scrub: true,  }}) //markers: true
     .to("img", { scale: 1.7, z: 400, transformOrigin: "center center", ease: "power1.inOut" })
     .to(".section.hero", { scale: 1, transformOrigin: "center center", ease: "power1.inOut" },"<");
 });
@@ -33,6 +33,8 @@ window.addEventListener("load", () => {
   <TopBar />
   <SocialBar />
   <Timeline />
+
+  <div class="test"></div>
   <div class="wrapper">
     
     <div class="content">
@@ -46,7 +48,13 @@ window.addEventListener("load", () => {
 
       </div>
       <MiddleBlock />
-      <div class="block skills"></div>
+
+      
+
+      
+      <div class="skills"></div>
+
+      <div class="skills2"></div>
     </div>
 
     <div class="image-container">
@@ -92,10 +100,11 @@ window.addEventListener("load", () => {
 }
 
 .content .section.hero {
-  background-image: url("../assets/Mountain.png");
-  background-position: 89% 35%;
+  background-image: url("../assets/Mountain2.png");
+  background-position: 89% 15%;
   background-repeat: no-repeat;
   background-size: cover;
+  z-index: 1;
 }
 
 .image-container {
@@ -121,13 +130,32 @@ window.addEventListener("load", () => {
 /* SECTION */
 
 
-.block {
+.test {
   width: 100%;
   height: 200vh;
-  padding: 5% 0;
+  background-image: url("../assets/Mountain.png");
+  background-size: cover;
+  position: fixed;
+  background-position: 0% 30%;
+  top: 0;
+  z-index: 0;
+}
+.block {
+  width: 100%;
+  height: 120vh;
+  padding: 12% 0;
+  background-color: #1F2E38;
 }
 .skills {
-  background-color: #4c5466;
+  width: 100%;
+  height: 120vh;
+  background-color: rgba(31, 46, 56, 0.5);
+}
+
+.skills2 {
+  width: 100%;
+  height: 120vh;
+  background-color: rgba(31, 46, 56, 1);
 }
 
 .diamond {
