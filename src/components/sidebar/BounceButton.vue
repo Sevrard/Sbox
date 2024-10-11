@@ -62,7 +62,7 @@ window.addEventListener("scroll", () => {
   position: absolute;
   z-index: 2000;
   right: 7%;
-  top: 40%;
+  top: 31vh;
   display: flex;
   flex-direction: column;
   gap: 1px;
