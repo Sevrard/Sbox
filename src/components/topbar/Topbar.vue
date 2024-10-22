@@ -2,7 +2,13 @@
 ///////////////////////////////////////////////////////////
 <template>
     <div class="topBar">
-
+        <div>
+            <Login v-if="!user" />
+            <div v-else>
+                <h1>Bienvenue, {{ user.displayName }}</h1>
+                <img :src="user.photoURL" alt="Avatar utilisateur" />
+            </div>
+        </div>
         <div class="btnBox">
             <button class="themeBtn b1" @click="setTheme('red-theme')"></button>
             <button class="themeBtn b2" @click="setTheme('green-theme')"></button>
@@ -26,12 +32,38 @@
 //////////////////////////////////////////////////////////// SCRIPT
 ///////////////////////////////////////////////////////////
 <script setup>
-import { ref } from 'vue';
 import { useI18n } from 'vue-i18n'; 
 import { useThemeStore } from '../../stores/themesStore.js'; 
+import { ref, onMounted } from 'vue';
+import { auth } from '../../firebase'; // Importer Firebase Auth
+import Login from '../utils/GAuthButton.vue';
 
 const { locale } = useI18n(); 
 const currentLang = ref('fr'); // Langue par défaut
+
+// État pour l'utilisateur connecté
+const user = ref(null);
+
+// Fonction pour gérer la connexion avec Google
+const handleGoogleLogin = async () => {
+  try {
+    const loggedInUser = await signInWithGoogle();
+    user.value = loggedInUser; // Mettre à jour l'utilisateur après la connexion
+  } catch (error) {
+    console.error("Erreur lors de la connexion Google", error);
+  }
+};
+
+// Surveiller l'état de l'utilisateur connecté
+onMounted(() => {
+  auth.onAuthStateChanged((currentUser) => {
+    if (currentUser) {
+      user.value = currentUser; // Mettre à jour l'état utilisateur
+    } else {
+      user.value = null; // Aucune connexion
+    }
+  });
+});
 
 const toggleLanguage = (event) => {
   if (event.target.checked) {
