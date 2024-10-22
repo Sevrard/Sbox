@@ -7,7 +7,8 @@
         <img :src="user.photoURL" alt="Avatar utilisateur" />
       </div>
     </div>
-  </template>
+  </template> 
+  
   
   <script>
   import { ref } from 'vue';
