@@ -9,6 +9,8 @@ import SocialBar from "./sidebar/Socialbar.vue"
 import Timeline from "./sidebar/Timeline.vue"
 import BounceButton from "./sidebar/BounceButton.vue"
 import MiddleBlock from "./MiddleBlock.vue"
+import SkillBall from "./utils/SkillBall.vue"
+
 console.clear();
 
 
@@ -34,27 +36,18 @@ window.addEventListener("load", () => {
   <SocialBar />
   <Timeline />
 
-  <div class="test"></div>
+  <div class="fixedBackground"></div>
   <div class="wrapper">
     
     <div class="content">
       <section class="section hero"></section>
       <section class="gradient-fade"></section>
-      <div class="block">
-
-        <div class="diamond"></div>
-
-
-
-      </div>
+      <section class="block">
+        <SkillBall />
+      </section>
       <MiddleBlock />
-
-      
-
-      
-      <div class="skills"></div>
-
-      <div class="skills2"></div>
+      <section class="skills"></section>
+      <section class="skills2"></section>
     </div>
 
     <div class="image-container">
@@ -130,7 +123,7 @@ window.addEventListener("load", () => {
 /* SECTION */
 
 
-.test {
+.fixedBackground {
   width: 100%;
   height: 200vh;
   background-image: url("../assets/Mountain.png");
@@ -142,7 +135,7 @@ window.addEventListener("load", () => {
 }
 .block {
   width: 100%;
-  height: 120vh;
+  height: 150vh;
   padding: 12% 0;
   background-color: #1F2E38;
 }

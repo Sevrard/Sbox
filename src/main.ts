@@ -13,7 +13,7 @@ const messages = {
         dlEuroCv : "Telecharger le CV Europass"
       },
     fr: {
-        clickToNext: 'Clique pour continuer',
+        clickToNext: 'Voir mon profil',
         shortDescription : "Passionate about web development and new technologies, I have had the opportunity to work on projects using various technical environments, including Node.js, Angular, and React. Naturally self-taught, I quickly adapt to any tech stack, allowing me to be productive from the start of my assignments. My curiosity and eagerness to learn drive me to continuously improve my skills and stay at the forefront of the latest innovations.",
         cvText: "I am currently looking for a new long-term opportunity <span class='red-text'>( </span>either hybrid or fully remote<span class='red-text'> )</span> . If you are seeking a passionate developer who can quickly adapt to new technologies and contribute effectively to your projects, feel free to download my CV and get in touch to discuss further.",
         dlCustomCv : "Dowload my custom CV",

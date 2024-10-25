@@ -52,9 +52,8 @@ window.addEventListener("scroll", () => {
   align-items: center;
   gap: 65px;
   font-size: 30px;
-}
 
-ul {
+  ul {
   z-index: 2000;
   position: absolute;
   top: 50%;
@@ -197,4 +196,7 @@ ul li a span:after {
   transform: rotateX(-90deg) translateY(50%);
   transition: transform 0.5s;
 }
+}
+
+
 </style>

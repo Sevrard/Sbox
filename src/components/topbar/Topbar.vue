@@ -4,9 +4,9 @@
     <div class="topBar">
         <div>
             <Login v-if="!user" />
-            <div v-else>
-                <h1>Bienvenue, {{ user.displayName }}</h1>
+            <div class="authBtnContent" v-else>
                 <img :src="user.photoURL" alt="Avatar utilisateur" />
+                <h1>{{ user.displayName }}</h1>
             </div>
         </div>
         <div class="btnBox">
@@ -91,6 +91,7 @@ const { setTheme } = useThemeStore();
     height: 40px;
     background: rgba(0, 0, 0, 0.05);
     z-index: 1000;
+    display:flex;
 }
 
 .btnBox {

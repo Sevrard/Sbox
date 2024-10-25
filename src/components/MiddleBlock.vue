@@ -45,10 +45,10 @@ import logo from "../assets/white.png";
     background-color: #2A405C;
     border-radius: 15px;
     /* box-shadow: 0px 0px 34px 19px rgb(236 88 114 / 50%); */
-    padding: 70px 70px;
+    padding: 80px 0px;
 
     p {
-        font-size: 17px;
+        font-size: 15px;
         color:white;
         font-family: Monospace;
         line-height: 1.7;
@@ -60,11 +60,11 @@ import logo from "../assets/white.png";
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 50px;
+    gap: 40px;
 }
 
 .middleTextContent {
-    width: 80%;
+    width: 68%;
 }
 
 .middleButtonContent{
@@ -73,8 +73,8 @@ import logo from "../assets/white.png";
 }
 
 .sLogo {
-  width: 150px;
-  height: 150px;
+  width: 120px;
+  height: 120px;
   background-image: var(--logo);
   background-size: contain;
   background-repeat: no-repeat;

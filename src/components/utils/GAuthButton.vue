@@ -1,18 +1,19 @@
 <template>
-    <div>
-      <h1>Se connecter</h1>
+
+    <div class="authBtnContent">
       <button @click="handleGoogleLogin">Se connecter avec Google</button>
       <div v-if="user">
         <p>Bienvenue, {{ user.displayName }}</p>
         <img :src="user.photoURL" alt="Avatar utilisateur" />
       </div>
     </div>
-  </template> 
+
+</template> 
 
   
-  <script>
+<script>
   import { ref } from 'vue';
-  import { signInWithGoogle } from '../../firebase'; // Importer la fonction d'authentification
+  import { signInWithGoogle } from '../../firebase'; 
   
   export default {
     setup() {
@@ -33,13 +34,19 @@
       };
     }
   };
-  </script>
-  
+</script>
 
-  VITE_FIREBASE_API_KEY="AIzaSyC8ygpyL5tO3YIfGTJRoK4N5OPfu4meTnY"
-VITE_FIREBASE_AUTH_DOMAIN="logopedie-87c67.firebaseapp.com"
-VITE_FIREBASE_PROJECT_ID="logopedie-87c67"
-VITE_FIREBASE_STORAGE_BUCKET="logopedie-87c67.appspot.com"
-VITE_FIREBASE_MESSAGING_SENDER_ID="607119035341"
-VITE_FIREBASE_APP_ID="1:607119035341:web:c2dbc209c5bb650cd91284"
-VITE_FIREBASE_MEASUREMENT_ID="G-VRW7RQ71HK"
+<style>
+  .authBtnContent {
+    display: flex;
+    font-size: 7px;
+    color: white;
+    font-family: Monospace;
+    gap: 10px;
+
+    img {
+      width: 36px;
+    }
+  }
+</style>
+  

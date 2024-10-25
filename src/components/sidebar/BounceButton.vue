@@ -44,7 +44,7 @@ window.addEventListener("scroll", () => {
   <div @click="scrollToSection" class="rightPart">
 
     <div class="rightText">
-      <h1> {{ $t('clickToNext') }} </h1>
+      <!-- <h1> {{ $t('clickToNext') }} </h1> -->
       <!-- <h2> {{$t('clickToNext')}} </h2> -->
       <!-- <h3> {{$t('clickToNext')}} </h3>  -->
     </div>
@@ -61,8 +61,8 @@ window.addEventListener("scroll", () => {
 .rightPart {
   position: absolute;
   z-index: 2000;
-  right: 7%;
-  top: 50%;
+  right: 12%;
+  top: 45%;
   transform: translateY(-100%);
   display: flex;
   flex-direction: column;
@@ -99,8 +99,8 @@ window.addEventListener("scroll", () => {
 
 .pin {
   align-self: center;
-  width: 30px;
-  height: 30px;
+  width: 38px;
+  height: 38px;
   border-radius: 50% 50% 50% 0;
   background: var(--mainColor);
   -webkit-transform: rotate(-45deg);
@@ -130,8 +130,8 @@ window.addEventListener("scroll", () => {
 
 .pin:after {
   content: '';
-  width: 14px;
-  height: 14px;
+  width: 22px;
+  height: 22px;
   margin: 8px 0 0 8px;
   background: black;
   position: absolute;
@@ -158,10 +158,10 @@ window.addEventListener("scroll", () => {
 .pulse:after {
   content: "";
   border-radius: 50%;
-  height: 40px;
-  width: 40px;
+  height: 50px;
+  width: 50px;
   position: absolute;
-  margin: -13px 0 0 -13px;
+  margin: -12px 0 0 -18px;
   -webkit-animation: pulsate 1s ease-out;
   -moz-animation: pulsate 1s ease-out;
   -o-animation: pulsate 1s ease-out;
