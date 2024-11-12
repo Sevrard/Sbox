@@ -9,11 +9,16 @@ import SocialBar from "./sidebar/Socialbar.vue"
 import Timeline from "./sidebar/Timeline.vue"
 import BounceButton from "./sidebar/BounceButton.vue"
 import MiddleBlock from "./MiddleBlock.vue"
-import SkillBall from "./utils/SkillBall.vue"
+import AboutMe from "./AboutMe.vue"
+import Skills from "./Skills.vue"
+
+import { ref } from "vue";
+
+
 
 console.clear();
 
-
+const initialProgress = ref(50); // Valeur initiale de la progression
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin); // Enregistrer ScrollToPlugin
 window.addEventListener("scroll", () => {});
 window.addEventListener("load", () => {
@@ -34,19 +39,25 @@ window.addEventListener("load", () => {
 <template>
   <TopBar />
   <SocialBar />
-  <Timeline />
-
+  <!-- <Timeline /> -->
   <div class="fixedBackground"></div>
   <div class="wrapper">
     
     <div class="content">
       <section class="section hero"></section>
-      <section class="gradient-fade"></section>
+
+      <section class="gradient-fade-bot"></section>
       <section class="block">
+        <AboutMe />
         <SkillBall />
+      </section>      
+      <section class="gradient-fade-top"></section>
+
+      <section class="skills">
+        <Skills />
       </section>
+
       <MiddleBlock />
-      <section class="skills"></section>
       <section class="skills2"></section>
     </div>
 
@@ -85,11 +96,16 @@ window.addEventListener("load", () => {
   height: 100vh;
 }
 
-.gradient-fade {
+.gradient-fade-bot {
   height: 300px;
   margin-top: -300px;
   position: relative;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(31, 46, 56, 1));
+}
+.gradient-fade-top {
+  height: 300px;
+  position: relative;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(31, 46, 56, 1));
 }
 
 .content .section.hero {
@@ -135,7 +151,6 @@ window.addEventListener("load", () => {
 }
 .block {
   width: 100%;
-  height: 150vh;
   padding: 12% 0;
   background-color: #1F2E38;
 }

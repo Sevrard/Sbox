@@ -44,7 +44,7 @@ window.addEventListener("scroll", () => {
   <div @click="scrollToSection" class="rightPart">
 
     <div class="rightText">
-      <!-- <h1> {{ $t('clickToNext') }} </h1> -->
+      <h1> {{ $t('clickToNext') }} </h1>
       <!-- <h2> {{$t('clickToNext')}} </h2> -->
       <!-- <h3> {{$t('clickToNext')}} </h3>  -->
     </div>

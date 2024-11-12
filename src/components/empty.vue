@@ -21,6 +21,6 @@
 
     .content {
         
-    }
+      }
 
 </style>
