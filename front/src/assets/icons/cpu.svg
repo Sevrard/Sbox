@@ -1,0 +1,38 @@
+<!-- CPU / Chip - Line Icon -->
+<svg viewBox="0 0 24 24" aria-hidden="true"
+     fill="none" stroke="currentColor" stroke-width="1"
+     stroke-linecap="round" stroke-linejoin="round"
+     style="width:43px;height:43px;">
+  <!-- Corps de la puce -->
+  <rect x="6" y="6" width="12" height="12" rx="2"/>
+  <!-- Cœur -->
+  <rect x="10" y="10" width="4" height="4" rx="1"/>
+
+  <!-- Pins haut -->
+  <path d="M8 4v2"/>
+  <path d="M10 4v2"/>
+  <path d="M12 4v2"/>
+  <path d="M14 4v2"/>
+  <path d="M16 4v2"/>
+
+  <!-- Pins bas -->
+  <path d="M8 20v-2"/>
+  <path d="M10 20v-2"/>
+  <path d="M12 20v-2"/>
+  <path d="M14 20v-2"/>
+  <path d="M16 20v-2"/>
+
+  <!-- Pins gauche -->
+  <path d="M4 8h2"/>
+  <path d="M4 10h2"/>
+  <path d="M4 12h2"/>
+  <path d="M4 14h2"/>
+  <path d="M4 16h2"/>
+
+  <!-- Pins droite -->
+  <path d="M20 8h-2"/>
+  <path d="M20 10h-2"/>
+  <path d="M20 12h-2"/>
+  <path d="M20 14h-2"/>
+  <path d="M20 16h-2"/>
+</svg>

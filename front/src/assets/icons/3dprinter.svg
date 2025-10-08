@@ -1,0 +1,18 @@
+<!-- 3D Printer - Line Icon -->
+<svg viewBox="0 0 24 24" aria-hidden="true"
+     fill="none" stroke="currentColor" stroke-width="1"
+     stroke-linecap="round" stroke-linejoin="round"
+     style="width: 43px; height: 43px;">
+  <!-- Cadre -->
+  <rect x="3" y="3" width="18" height="18" rx="2"/>
+  <!-- Rail supérieur -->
+  <path d="M7 6h10"/>
+  <!-- Chariot (tête) -->
+  <rect x="10.5" y="8" width="3" height="2" rx="0.5"/>
+  <!-- Buse / descente -->
+  <path d="M12 10v3"/>
+  <!-- Pointe de buse stylisée -->
+  <path d="M11 14h2l-1 1z"/>
+  <!-- Plateau -->
+  <rect x="7" y="17" width="10" height="2" rx="0.5"/>
+</svg>
