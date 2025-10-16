@@ -64,7 +64,7 @@
           <a href="/CV_Evrard_Stephane.pdf" download class="btn btn-primary">Download CV</a>
         </div>
 
-        <div class="copyrights">© 2020 All rights reserved.</div>
+        <div class="copyrights">© 2024 All rights reserved.</div>
       </header>
 
       <!-- Mobile Navigation -->

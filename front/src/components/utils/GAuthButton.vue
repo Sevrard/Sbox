@@ -1,7 +1,10 @@
 <template>
 
     <div class="authBtnContent">
-      <button @click="handleGoogleLogin">Se connecter avec Google</button>
+      <button class="google-btn" @click="handleGoogleLogin">
+      <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google logo" class="google-icon"/>
+     
+    </button>
       <div v-if="user">
         <p>Bienvenue, {{ user.displayName }}</p>
         <img :src="user.photoURL" alt="Avatar utilisateur" />
@@ -47,7 +50,7 @@
     margin: 8px;
 
     img {
-      width: 36px;
+      width: 15px;
     }
   }
 </style>

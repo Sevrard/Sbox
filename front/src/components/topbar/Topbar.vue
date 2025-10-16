@@ -2,13 +2,15 @@
 ///////////////////////////////////////////////////////////
 <template>
     <div class="topBar">
-        <div class="authBtnBox">
+        <h4 v-html="$t('autoHeberge')"></h4>
+        
+        <!-- <div class="authBtnBox">
             <Login v-if="!user" />
             <div class="authBtnContent" v-else>
                 <img :src="user.photoURL" alt="Avatar utilisateur" />
-                <h1>{{ user.displayName }}</h1>
+                <h4>{{ user.displayName }}</h4>
             </div>
-        </div>
+        </div> -->
         <!-- <div class="btnBox">
             <button class="themeBtn b1" @click="setTheme('red-theme')"></button>
             <button class="themeBtn b2" @click="setTheme('green-theme')"></button>
@@ -126,7 +128,7 @@ span {
 .box {
     position: absolute;
     right: 1%;
-    top: 50%;
+    top: 57%;
     transform: translate(-50%, -50%);
 }
 

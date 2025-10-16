@@ -18,6 +18,7 @@ router.afterEach((to) => {
 const messages = {
     en: {
         clickToNext: 'Click to my skills',
+        autoHeberge: 'Self-hosted website on Synology NAS (Vue.js/Express)',
         hello: 'Hi.',
         aboutMe: 'Some words about me..',
         shortDescription : "My name is Stéphane, I’m 34 years old and I live in France. I’m a full stack developer with over 10 years of experience. In my last experience at Kiliba, I worked on a React/Vite.js architecture for the front end, and Node.js/Express/MongoDB for the back end. I’m used to working in start-up environments, applying the Scrum methodology to manage projects in an agile and iterative way.",
@@ -77,6 +78,7 @@ const messages = {
       },
     fr: {
         clickToNext: 'Voir mon profil',
+        autoHeberge: 'Site auto-hébergé sur NAS Synology (Vue.js/Express)',
         hello: 'Bonjour.',
         aboutMe: 'Quelques mots de présentation..',
         shortDescription : "Je m’appelle Stéphane, j’ai 34 ans et je vis en France. Je suis développeur full stack avec plus de 10 ans d’expérience. Lors de ma dernière expérience, j’ai eu l'occasion de travailler sur une architecture React/Vite.js coté front, et Node.js/Express/MongoDB coté back. J’ai l’habitude de travailler en appliquant la méthode Scrum pour gérer les projets de manière agile et itérative.",

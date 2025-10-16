@@ -8,12 +8,11 @@ import cron from "node-cron";
 import { fileURLToPath } from "url";
 import rateLimit from "express-rate-limit";
 
+
 dotenv.config();
 
 const app = express();
-app.use(cors());
-app.use(express.json());
-app.set("trust proxy", true); // utile si reverse proxy / hébergement NAS
+app.set("trust proxy", 1); // utile si reverse proxy / hébergement NAS
 
 // — CORS (optionnel : restreins à ton domaine front)
 app.use(cors({
@@ -88,7 +87,6 @@ app.post("/api/send-mail", async (req, res) => {
     return res.status(500).json({ ok: false, error: "mail_failed" });
   }
 });
-
 // === 2. Tracking des visites ===
 
 // === Paths robustes + dossier data ===
