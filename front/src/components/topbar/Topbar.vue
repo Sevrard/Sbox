@@ -2,7 +2,7 @@
 ///////////////////////////////////////////////////////////
 <template>
     <div class="topBar">
-        <div>
+        <div class="authBtnBox">
             <Login v-if="!user" />
             <div class="authBtnContent" v-else>
                 <img :src="user.photoURL" alt="Avatar utilisateur" />
@@ -92,6 +92,10 @@ const { setTheme } = useThemeStore();
     background: rgba(0, 0, 0, 0.05);
     z-index: 1000;
     display:flex;
+}
+
+.authBtnBox {
+    width: 92%;
 }
 
 .btnBox {

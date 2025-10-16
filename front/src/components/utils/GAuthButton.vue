@@ -39,10 +39,12 @@
 <style>
   .authBtnContent {
     display: flex;
+    justify-content: flex-end ;
     font-size: 7px;
     color: white;
     font-family: Monospace;
     gap: 10px;
+    margin: 8px;
 
     img {
       width: 36px;

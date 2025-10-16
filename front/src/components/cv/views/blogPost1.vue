@@ -7,7 +7,7 @@
       <header id="site_header" class="header mobile-menu-hide">
         <div class="header-content">
           <div class="header-photo">
-            <img src="/img/main_photo.jpg" alt="Alex Smith" />
+            <!-- <img src="/img/main_photo.jpg" alt="Alex Smith" /> -->
           </div>
           <div class="header-titles">
             <h2>Alex Smith</h2>
@@ -63,7 +63,7 @@
         <div class="single-page-content">
           <article class="post">
             <div class="post-thumbnail">
-              <img src="/img/blog/blog_post_1_full.jpg" alt="image" />
+              <!-- <img src="/img/blog/blog_post_1_full.jpg" alt="image" /> -->
             </div>
 
             <div class="post-content">

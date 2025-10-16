@@ -5,6 +5,16 @@ import { router } from "./router";
 import App from "./App.vue";
 
 
+const API_BASE = import.meta.env.VITE_API_BASE;
+
+router.afterEach((to) => {
+  fetch(`${API_BASE}/api/track-visit`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ path: to.fullPath, referer: document.referrer || "" }),
+  }).catch(() => {});
+});
+
 const messages = {
     en: {
         clickToNext: 'Click to my skills',
@@ -69,7 +79,7 @@ const messages = {
         clickToNext: 'Voir mon profil',
         hello: 'Bonjour.',
         aboutMe: 'Quelques mots de présentation..',
-        shortDescription : "Je m’appelle Stéphane, j’ai 34 ans et je vis en France. Je suis développeur full stack avec plus de 10 ans d’expérience. Lors de ma dernière expérience, j’ai eu l'occasion de travailler sur une architecture React/Vite.js pour le front-end, et Node.js/Express/MongoDB pour le back-end. J’ai l’habitude de travailler en appliquant la méthode Scrum pour gérer les projets de manière agile et itérative.",
+        shortDescription : "Je m’appelle Stéphane, j’ai 34 ans et je vis en France. Je suis développeur full stack avec plus de 10 ans d’expérience. Lors de ma dernière expérience, j’ai eu l'occasion de travailler sur une architecture React/Vite.js coté front, et Node.js/Express/MongoDB coté back. J’ai l’habitude de travailler en appliquant la méthode Scrum pour gérer les projets de manière agile et itérative.",
         cvText:"Je suis actuellement à la recherche d'une nouvelle aventure professionnelle long terme <span class='red-text'>( </span>hybride ou full remote<span class='red-text'> )</span> donc si vous êtes à la recherche d'un développeur passionné, capable de s'adapter rapidement à de nouvelles technologies et de contribuer efficacement à vos projets, n'hésitez pas à télécharger mon CV et à me contacter pour en discuter davantage.",
         dlCustomCv : "Telecharger le CV perso",
         dlEuroCv : "Telecharger le CV Europass",

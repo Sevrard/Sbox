@@ -54,14 +54,14 @@
 
         <div class="social-links">
           <ul>
-            <li><a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
-            <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+            <li><a href="#" target="https://www.linkedin.com/in/stephane-evrard-8905959b/"><i class="fab fa-linkedin-in"></i></a></li>
+            <li><a href="#" target="https://www.facebook.com/stephane.evrard"><i class="fab fa-facebook-f"></i></a></li>
             <li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
           </ul>
         </div>
 
         <div class="header-buttons">
-          <a href="#" target="_blank" class="btn btn-primary">Download CV</a>
+          <a href="/CV_Evrard_Stephane.pdf" download class="btn btn-primary">Download CV</a>
         </div>
 
         <div class="copyrights">© 2020 All rights reserved.</div>
@@ -72,11 +72,7 @@
         <span></span><span></span><span></span>
       </div>
 
-      <!-- Arrows Nav -->
-      <div class="lmpixels-arrows-nav">
-        <div class="lmpixels-arrow-right"><i class="lnr lnr-chevron-right"></i></div>
-        <div class="lmpixels-arrow-left"><i class="lnr lnr-chevron-left"></i></div>
-      </div>
+      
 
       <div class="content-area">
         <div class="animated-sections">
@@ -103,7 +99,7 @@
 
           <!-- About Me -->
           <section data-id="about-me" class="animated-section"
-         :class="{ 'section-active': current==='about-me' }">
+            :class="{ 'section-active': current === 'about-me' || !current }">
             <div class="section-content">
               <div v-html="$t('aboutTitle')" class="page-title"></div>
               <div class="row">
@@ -406,7 +402,7 @@
 
                       <!-- CMS Skills -->
                       <div class="block-title">
-                        <h3>CMS <span>Skills</span></h3>
+                        <h3>Dev <span>Skills</span></h3>
                       </div>
 
                       <div class="skills-info skills-second-style">
@@ -488,68 +484,6 @@
 
                   <div class="white-space-50"></div>
 
-                  <!-- Certificates -->
-                  <div class="row">
-                    <div class="col-xs-12 col-sm-12">
-                      <div class="block-title">
-                        <h3>Certificates</h3>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="row">
-                    <!-- Certificate 1 -->
-                    <div class="col-xs-12 col-sm-6">
-                      <div class="certificate-item clearfix">
-                        <div class="certi-logo">
-                          <img src="./assets/img/clients/client-1.png" alt="logo">
-                        </div>
-                        
-                        <div class="certi-content">
-                          <div class="certi-title">
-                            <h4>Psyhology of Intertnation Design</h4>
-                          </div>
-                          <div class="certi-id">
-                            <span>Membership ID: XXXX</span>
-                          </div>
-                          <div class="certi-date">
-                            <span>19 April 2018</span>
-                          </div>
-                          <div class="certi-company">
-                            <span></span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- End of Certificate 1 -->
-
-                    <!-- Certificate 2 -->
-                    <div class="col-xs-12 col-sm-6">
-                      <div class="certificate-item clearfix">
-                        <div class="certi-logo">
-                          <img src="./assets/img/clients/client-1.png" alt="logo">
-                        </div>
-                        
-                        <div class="certi-content">
-                          <div class="certi-title">
-                            <h4>Psyhology of Intertnation Design</h4>
-                          </div>
-                          <div class="certi-id">
-                            <span>Membership ID: XXXX</span>
-                          </div>
-                          <div class="certi-date">
-                            <span>19 April 2018</span>
-                          </div>
-                          <div class="certi-company">
-                            <span></span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- End of Certificate 2 -->
-
-                  </div>
-                  <!-- End of Certificates -->
                 </div>
               </section>
 
@@ -636,10 +570,11 @@
     import CpuIcon from '@/assets/icons/cpu.svg'
 
     const sections = ['home', 'first', 'about-me', 'resume', 'contact']
-    const current = ref<'home'| 'first' | 'about-me' | 'resume' | 'contact'>('home')
+    const current = ref<'home'| 'first' | 'about-me' | 'resume' | 'contact'>('first')
 
+    
     function setFromHash() {
-      const h = window.location.hash?.replace('#', '') || 'home'
+      const h = window.location.hash?.replace('#', '') || 'first'
       if (sections.includes(h)) current.value = h as typeof current.value
     }
 
@@ -665,9 +600,10 @@
       message: ''
     })
 
+    const API_BASE = import.meta.env.VITE_API_BASE;
     async function sendEmail() {
       try {
-        const response = await fetch('http://localhost:3000/api/send-mail', {
+        const response = await fetch(`${API_BASE}/api/send-mail`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(form.value)

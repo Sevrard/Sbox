@@ -25,9 +25,9 @@
       <div class="row">
         <div class="col-sm-8 col-md-8 portfolio-block">
           <div class="owl-carousel portfolio-page-carousel">
-            <div class="item"><img src="/img/portfolio/full/1.jpg" alt="" /></div>
+            <!-- <div class="item"><img src="/img/portfolio/full/1.jpg" alt="" /></div>
             <div class="item"><img src="/img/portfolio/full/2.jpg" alt="" /></div>
-            <div class="item"><img src="/img/portfolio/full/3.jpg" alt="" /></div>
+            <div class="item"><img src="/img/portfolio/full/3.jpg" alt="" /></div> -->
           </div>
 
           <div class="portfolio-page-video embed-responsive embed-responsive-16by9">

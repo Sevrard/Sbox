@@ -9,7 +9,7 @@ import SocialBar from "./sidebar/Socialbar.vue"
 import BounceButton from "./sidebar/BounceButton.vue"
 import MiddleBlock from "./MiddleBlock.vue"
 import AboutMe from "./AboutMe.vue"
-import Skills from "./Skills.vue"
+//import Skills from "./Skills.vue"
 
 import { ref } from "vue";
 import CvLayout from "./cv/cvLayout.vue";
