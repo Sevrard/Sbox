@@ -54,9 +54,9 @@
 
         <div class="social-links">
           <ul>
-            <li><a href="#" target="https://www.linkedin.com/in/stephane-evrard-8905959b/"><i class="fab fa-linkedin-in"></i></a></li>
-            <li><a href="#" target="https://www.facebook.com/stephane.evrard"><i class="fab fa-facebook-f"></i></a></li>
-            <li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
+            <li><a target="_blank" href="https://www.linkedin.com/in/stephane-evrard-8905959b/"><i class="fab fa-linkedin-in"></i></a></li>
+            <li><a target="_blank" href="https://www.facebook.com/stephane.evrard"><i class="fab fa-facebook-f"></i></a></li>
+            <li><a><i class="fab fa-twitter"></i></a></li>
           </ul>
         </div>
 
@@ -522,25 +522,27 @@
                     <div class="controls two-columns">
                       <div class="fields clearfix">
                         <div class="left-column">
+                          <input name="company" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px" />
+
                           <div class="form-group form-group-with-icon">
-                            <input id="form_name" v-model="form.name" type="text" name="name" class="form-control" required data-error="Name is required.">
+                            <input id="form_name" placeholder="Nom :" v-model="form.name" type="text" name="name" class="form-control" required data-error="Name is required.">
                             <label v-html="$t('contactName')"></label><div class="form-control-border"></div><div class="help-block with-errors"></div>
                           </div>
 
                           <div class="form-group form-group-with-icon">
-                            <input id="form_email"  v-model="form.email" type="email" name="email" class="form-control" required data-error="Valid email is required.">
+                            <input id="form_email" placeholder="Mail :"  v-model="form.email" type="email" name="email" class="form-control" required data-error="Valid email is required.">
                             <label v-html="$t('contactEmail')"></label><div class="form-control-border"></div><div class="help-block with-errors"></div>
                           </div>
 
                           <div class="form-group form-group-with-icon">
-                            <input id="form_subject" type="text" v-model="form.subject" name="subject" class="form-control" required data-error="Subject is required.">
+                            <input id="form_subject" placeholder="Sujet:" type="text" v-model="form.subject" name="subject" class="form-control" required data-error="Subject is required.">
                             <label v-html="$t('contactSujet')"></label><div class="form-control-border"></div><div class="help-block with-errors"></div>
                           </div>
                         </div>
 
                         <div class="right-column">
                           <div class="form-group form-group-with-icon">
-                            <textarea id="form_message" v-model="form.message" name="message" class="form-control" rows="7" required data-error="Please, leave me a message."></textarea>
+                            <textarea id="form_message" placeholder="Votre message..." v-model="form.message" name="message" class="form-control" rows="7" required data-error="Please, leave me a message."></textarea>
                             <label>Message</label><div class="form-control-border"></div><div class="help-block with-errors"></div>
                           </div>
                         </div>
@@ -594,6 +596,7 @@
 
     // --- Formulaire de contact ---
     const form = ref({
+      honeypot: '' ,
       name: '',
       email: '',
       subject: '',
@@ -601,7 +604,10 @@
     })
 
     const API_BASE = import.meta.env.VITE_API_BASE;
+    const startedAt = Date.now();
+
     async function sendEmail() {
+      if (Date.now() - startedAt < 3000) return alert('Envoi trop rapide');
       try {
         const response = await fetch(`${API_BASE}/api/send-mail`, {
           method: 'POST',
@@ -611,7 +617,7 @@
 
         if (response.ok) {
           alert('Email envoyé !')
-          form.value = { name: '', email: '', subject: '', message: '' } // reset
+          form.value = {honeypot:'',  name: '', email: '', subject: '', message: '' } // reset
         } else {
           alert('Erreur lors de l’envoi')
         }

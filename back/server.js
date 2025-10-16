@@ -6,6 +6,7 @@ import fs from "fs";
 import path from "path";
 import cron from "node-cron";
 import { fileURLToPath } from "url";
+import rateLimit from "express-rate-limit";
 
 dotenv.config();
 
@@ -14,108 +15,170 @@ app.use(cors());
 app.use(express.json());
 app.set("trust proxy", true); // utile si reverse proxy / hébergement NAS
 
-// === Config transport mail (réutilisée partout) ===
+// — CORS (optionnel : restreins à ton domaine front)
+app.use(cors({
+  origin: (origin, cb) => cb(null, true), // ou ['https://ton-domaine.fr']
+  methods: ["POST", "OPTIONS"],
+}));
+app.use(express.json({ limit: "200kb" }));
+
+// — Rate limit (anti spam burst)
+app.use("/api/send-mail", rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 50,
+  standardHeaders: true,
+  legacyHeaders: false,
+}));
+
+// — Transport mail
 const transporter = nodemailer.createTransport({
   service: "gmail",
-  auth: {
-    user: process.env.MAIL_USER,
-    pass: process.env.MAIL_PASS,
-  },
+  auth: { user: process.env.MAIL_USER, pass: process.env.MAIL_PASS },
 });
 
-// === 1. Ton endpoint existant de contact ===
+// (optionnel) vérifier la connexion au démarrage
+transporter.verify().then(()=>console.log("SMTP ok")).catch(console.error);
+
+// — Helpers
+const isEmail = (v="") => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+const stripHtml = (s="") => s.replace(/<[^>]*>/g, "");
+
+// — Endpoint contact
 app.post("/api/send-mail", async (req, res) => {
-  const { name, email, subject, message } = req.body;
-  let finalSub = subject === "" ? "MAILJOB=" : "MAILJOB=" + subject;
+  const { name = "", email = "", subject = "", message = "", honeypot = "" } = req.body || {};
+
+  // Honeypot
+  if (honeypot && honeypot.trim() !== "") {
+    return res.status(400).json({ ok: false, error: "bot_detected" });
+  }
+
+  // Validations
+  if (!name.trim() || !email.trim() || !message.trim()) {
+    return res.status(400).json({ ok: false, error: "missing_fields" });
+  }
+  if (!isEmail(email)) {
+    return res.status(400).json({ ok: false, error: "invalid_email" });
+  }
+  if (message.length > 5000) {
+    return res.status(400).json({ ok: false, error: "message_too_long" });
+  }
+
+  // Nettoyage minimal
+  const cleanMessage = stripHtml(message).trim();
+  const finalSub = `MAILJOB=${subject?.trim() || ""}`.slice(0, 200); // limite le sujet
 
   try {
     await transporter.sendMail({
-      from: `"${name}" <${email}>`,
+      from: `"Portfolio Contact" <${process.env.MAIL_USER}>`, // meilleur pour SPF/DMARC
+      replyTo: `"${name.trim()}" <${email.trim()}>`,           // répondra au visiteur
       to: process.env.MAIL_USER,
       subject: finalSub,
-      text: message,
+      text: [
+        `Nom: ${name.trim()}`,
+        `Email: ${email.trim()}`,
+        `Sujet: ${subject.trim() || "(vide)"}`,
+        "",
+        cleanMessage,
+      ].join("\n"),
     });
-    res.sendStatus(200);
+
+    return res.status(200).json({ ok: true });
   } catch (err) {
-    console.error(err);
-    res.sendStatus(500);
+    console.error("MAIL ERROR:", err);
+    return res.status(500).json({ ok: false, error: "mail_failed" });
   }
 });
 
 // === 2. Tracking des visites ===
 
+// === Paths robustes + dossier data ===
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const LOG_FILE = path.join(__dirname, "visits.json");     
-const VISITOR_FILE = path.join(__dirname, "visitor.json"); 
+const DATA_DIR = path.join(__dirname, "data");
+fs.mkdirSync(DATA_DIR, { recursive: true });
 
-function loadVisits() {
-  if (!fs.existsSync(LOG_FILE)) return [];
-  return JSON.parse(fs.readFileSync(LOG_FILE, "utf8") || "[]");
+const LOG_FILE = path.join(DATA_DIR, "visits.json");
+const VISITORS_FILE = path.join(DATA_DIR, "visitors.json");
+
+// === I/O sûres ===
+function safeReadJSON(file, fallback) {
+  try {
+    if (!fs.existsSync(file)) return fallback;
+    const txt = fs.readFileSync(file, "utf8");
+    return txt?.trim() ? JSON.parse(txt) : fallback;
+  } catch (e) {
+    console.error("READ JSON ERROR:", file, e.message);
+    return fallback;
+  }
 }
-function saveVisits(data) {
-  fs.writeFileSync(LOG_FILE, JSON.stringify(data, null, 2), "utf8");
+function safeWriteJSON(file, obj) {
+  try {
+    fs.writeFileSync(file, JSON.stringify(obj, null, 2), "utf8");
+    return true;
+  } catch (e) {
+    console.error("WRITE JSON ERROR:", file, e.message);
+    return false;
+  }
 }
 
-function loadVisitors() {
-  if (!fs.existsSync(VISITOR_FILE)) return [];
-  return JSON.parse(fs.readFileSync(VISITOR_FILE, "utf8") || "[]");
-}
-function saveVisitors(list) {
-  // on trie pour éviter les diffs inutiles entre commits/versions
-  const dedupedSorted = Array.from(new Set(list)).sort((a, b) =>
-    a.localeCompare(b)
-  );
-  fs.writeFileSync(VISITOR_FILE, JSON.stringify(dedupedSorted, null, 2), "utf8");
+function loadVisits()      { return safeReadJSON(LOG_FILE, []); }
+function saveVisits(data)  { return safeWriteJSON(LOG_FILE, data); }
+function loadVisitors()    { return safeReadJSON(VISITORS_FILE, []); }
+function saveVisitors(arr) {
+  const dedupedSorted = Array.from(new Set(arr)).sort((a,b)=>a.localeCompare(b));
+  return safeWriteJSON(VISITORS_FILE, dedupedSorted);
 }
 
+// === Track visit (sauvegarde AVANT l'e-mail) ===
 app.post("/api/track-visit", async (req, res) => {
-  const ip = req.ip || req.connection.remoteAddress;
-  const ua = req.get("User-Agent") || "";
-  const referer = req.get("Referer") || req.body.referer || "";
-  const pathVisited = req.body.path || "";
+  const ip = req.ip || req.connection?.remoteAddress || "unknown";
+  const ua = (req.get("User-Agent") || "").replace(/\s+/g, " ").trim();
+  const referer = req.get("Referer") || req.body?.referer || "";
+  const pathVisited = req.body?.path || "";
   const now = new Date().toISOString();
 
   const visits = loadVisits();
   visits.push({ ip, path: pathVisited, referer, ua, date: now });
   saveVisits(visits);
 
-  const uaNorm = ua.replace(/\s+/g, " ").trim();
-
-  if (uaNorm) {
+  if (ua) {
     const visitors = loadVisitors();
-    if (!visitors.includes(uaNorm)) {
+    let isNew = false;
+    if (!visitors.includes(ua)) {
+      visitors.push(ua);
+      saveVisitors(visitors);           // <-- persiste quoi qu'il arrive
+      isNew = true;
+    }
 
-      // MAIL nouveau visiteur
+    if (isNew) {
+      // e-mail informatif (ne bloque PAS la persistance)
       try {
         await transporter.sendMail({
           from: `"Sevrard.fr Tracker" <${process.env.MAIL_USER}>`,
           to: process.env.MAIL_USER,
-          subject: `🎉 Nouveau visiteur #${visitors.length + 1}`,
-          text: `Un nouveau visiteur unique vient d'arriver.\n\nUser-Agent:\n${uaNorm}`
+          subject: `🎉 Nouveau visiteur #${visitors.length}`,
+          text: `Un nouveau visiteur unique vient d'arriver.\n\nUser-Agent:\n${ua}`
         });
-
-        visitors.push(uaNorm);
-        saveVisitors(visitors);
         console.log("✅ Mail nouveau visiteur envoyé");
       } catch (err) {
-        console.error("❌ Erreur envoi mail :", err);
+        console.error("❌ Erreur envoi mail (visiteur) :", err.message);
       }
     }
   }
+
   res.json({ ok: true });
 });
 
-// === 3. CRON : envoi rapport journalier à 9h ===
-cron.schedule("0 * * * *", async () => {
+// === CRON: quotidien 09:00 (et pas chaque heure) ===
+cron.schedule("0 9 * * *", async () => {
   const visits = loadVisits();
-  if (visits.length === 0) return;
+  if (!visits.length) return;
 
   let text = "Rapport des visites :\n\n";
-  visits.forEach((v) => {
+  for (const v of visits) {
     text += `IP: ${v.ip}\nDate: ${v.date}\nPath: ${v.path}\nReferer: ${v.referer}\nUA: ${v.ua}\n---\n`;
-  });
+  }
 
   try {
     await transporter.sendMail({
@@ -124,12 +187,10 @@ cron.schedule("0 * * * *", async () => {
       subject: `Rapport visites (${visits.length})`,
       text,
     });
-
-    // vider après envoi
-    saveVisits([]);
-    console.log("✅ Rapport visites envoyé");
+    saveVisits([]); // on vide après envoi
+    console.log("✅ Rapport visites envoyé & reset");
   } catch (err) {
-    console.error("❌ Erreur envoi rapport :", err);
+    console.error("❌ Erreur envoi rapport :", err.message);
   }
 });
 
